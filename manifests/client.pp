@@ -92,15 +92,25 @@ define openvpn_client::client(
 
   include openvpn_client
 
+  validate_array($custom_options)
+  unless $auth == undef { validate_string($auth) }
   unless $auth_user_pass == undef { validate_absolute_path($auth_user_pass) }
   unless $ca == undef { validate_absolute_path($ca) }
-  validate_array($custom_options)
-  validate_bool($client, $nobind, $persist_key, $persist_remote_ip,
-  $persist_tun, $tls_client)
-  validate_integer($port)
-  validate_integer($verb)
-  validate_string($auth, $cipher, $comp_lzo, $dev, $proto,
-  $remote_cert_tls, $resolv_retry, $server)
+  unless $cipher == undef { validate_string($cipher) }
+  unless $client == undef { validate_bool($client) }
+  unless $comp_lzo == undef { validate_string($comp_lzo) }
+  unless $dev == undef { validate_string($dev) }
+  unless $nobind == undef { validate_bool($nobind) }
+  unless $persist_key == undef { validate_bool($persist_key) }
+  unless $persist_remote_ip == undef { validate_bool($persist_remote_ip) }
+  unless $persist_tun == undef { validate_bool($persist_tun) }
+  unless $port == undef { validate_integer($port) }
+  unless $proto == undef { validate_string($proto) }
+  unless $remote_cert_tls == undef { validate_string($remote_cert_tls) }
+  unless $resolv_retry == undef { validate_string($resolv_retry) }
+  unless $server == undef { validate_string($server) }
+  unless $tls_client == undef { validate_bool($tls_client) }
+  unless $verb == undef { validate_integer($verb) }
 
   file { "${::openvpn_client::openvpn_dir}/${server}.conf":
     mode    => '0640',
