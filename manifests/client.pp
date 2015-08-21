@@ -15,7 +15,7 @@
 # noted here.
 #
 # * `auth`
-# String; defaults to `SHA256`.
+# String; defaults to `undef`.
 #
 # * `auth_user_pass`
 # Absolute path; defaults to `undef`.
@@ -27,19 +27,19 @@
 # Absolute path; defaults to `undef`.
 #
 # * `cipher`
-# String; defaults to `AES-256-CBC`.
+# String; defaults to `undef`.
 #
 # * `client`
 # Bool; defaults to `true`.
 #
 # * `comp_lzo`
-# String; defaults to `adaptive`.
+# String; defaults to `undef`.
 #
 # * `dev`
-# String; defaults to `tun`.
+# String; defaults to `undef`.
 #
 # * `group`
-# String; defaults to `nogroup`.
+# String; defaults to `undef`.
 #
 # * `key`
 # Absolute path; defaults to `undef`.
@@ -48,7 +48,7 @@
 # Bool; defaults to `true`.
 #
 # * `ns_cert_type`
-# String; defaults to `server`.
+# String; defaults to `undef`.
 #
 # * `persist_key`
 # Bool; defaults to `true`.
@@ -60,16 +60,16 @@
 # Bool; defaults to `true`.
 #
 # * `port`
-# Integer; defaults to `1194`.
+# Integer; defaults to `undef`.
 #
 # * `proto`
-# String; defaults to `udp`.
+# String; defaults to `undef`.
 #
 # * `remote_cert_tls`
-# String; defaults to `server`.
+# String; defaults to `undef`.
 #
 # * `resolv_retry`
-# String; defaults to `infinite`.
+# String; defaults to `undef`.
 #
 # * `server`
 # String; defaults to `$name`.
@@ -78,62 +78,58 @@
 # Bool; defaults to `true`.
 #
 # * `user`
-# String; defaults to `nobody`.
+# String; defaults to `undef`.
 #
 # * `verb`
-# Integer; defaults to `3`.
+# Integer; defaults to `undef`.
 #
 define openvpn_client::client(
-  $auth              = 'SHA256',
+  $auth              = undef,
   $auth_user_pass    = undef,
   $ca                = undef,
-  $cert              = undef, #new
-  $cipher            = 'AES-256-CBC',
+  $cert              = undef,
+  $cipher            = undef,
   $client            = true,
-  $comp_lzo          = 'adaptive',
+  $comp_lzo          = undef,
   $custom_options    = [],
-  $dev               = 'tun',
-  $group             = 'nogroup', #new
-  $key               = undef, #new
+  $dev               = undef,
+  $group             = undef,
+  $key               = undef,
   $nobind            = true,
-  $ns_cert_type      = 'server', #new
+  $ns_cert_type      = undef,
   $persist_key       = true,
   $persist_remote_ip = true,
   $persist_tun       = true,
-  $port              = 1194,
-  $proto             = 'udp',
-  $remote_cert_tls   = 'server',
-  $resolv_retry      = 'infinite',
+  $port              = undef,
+  $proto             = undef,
+  $remote_cert_tls   = undef,
+  $resolv_retry      = undef,
   $server            = $name,
   $tls_client        = true,
-  $user              = 'nobody', #new
-  $verb              = 3,
+  $user              = undef,
+  $verb              = undef,
   ) {
 
   include openvpn_client
 
   validate_array($custom_options)
+  validate_bool($client, $nobind, $persist_key, $persist_remote_ip,
+  $persist_tun, $tls_client)
   unless $auth == undef { validate_string($auth) }
   unless $auth_user_pass == undef { validate_absolute_path($auth_user_pass) }
   unless $ca == undef { validate_absolute_path($ca) }
   unless $cert == undef { validate_absolute_path($cert) }
   unless $cipher == undef { validate_string($cipher) }
-  unless $client == undef { validate_bool($client) }
   unless $comp_lzo == undef { validate_string($comp_lzo) }
   unless $dev == undef { validate_string($dev) }
   unless $group == undef { validate_string($group) }
   unless $key == undef { validate_absolute_path($key) }
-  unless $nobind == undef { validate_bool($nobind) }
   unless $ns_cert_type == undef { validate_string($ns_cert_type) }
-  unless $persist_key == undef { validate_bool($persist_key) }
-  unless $persist_remote_ip == undef { validate_bool($persist_remote_ip) }
-  unless $persist_tun == undef { validate_bool($persist_tun) }
   unless $port == undef { validate_integer($port) }
   unless $proto == undef { validate_string($proto) }
   unless $remote_cert_tls == undef { validate_string($remote_cert_tls) }
   unless $resolv_retry == undef { validate_string($resolv_retry) }
   unless $server == undef { validate_string($server) }
-  unless $tls_client == undef { validate_bool($tls_client) }
   unless $user == undef { validate_string($user) }
   unless $verb == undef { validate_integer($verb) }
 
