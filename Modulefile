@@ -1,5 +1,5 @@
 name          'thejandroman-openvpn_client'
-version       '0.1.3'
+version       '0.1.4'
 source        'https://github.com/thejandroman/puppet-openvpn_client.git'
 author        'thejandroman'
 license       'Apache-2.0'

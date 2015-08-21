@@ -86,7 +86,7 @@ where their descriptions can be found. Only default values and quirks will be
 noted here.
 
  * `auth`
- String; defaults to `SHA256`.
+ String; defaults to `undef`.
 
  * `auth_user_pass`
  Absolute path; defaults to `undef`.
@@ -98,19 +98,19 @@ noted here.
  Absolute path; defaults to `undef`.
 
  * `cipher`
- String; defaults to `AES-256-CBC`.
+ String; defaults to `undef`.
 
  * `client`
  Bool; defaults to `true`.
 
  * `comp_lzo`
- String; defaults to `adaptive`.
+ String; defaults to `undef`.
 
  * `dev`
- String; defaults to `tun`.
+ String; defaults to `undef`.
 
  * `group`
- String; defaults to `nogroup`.
+ String; defaults to `undef`.
 
  * `key`
  Absolute path; defaults to `undef`.
@@ -119,7 +119,7 @@ noted here.
  Bool; defaults to `true`.
 
  * `ns_cert_type`
- String; defaults to `server`.
+ String; defaults to `undef`.
 
  * `persist_key`
  Bool; defaults to `true`.
@@ -131,16 +131,16 @@ noted here.
  Bool; defaults to `true`.
 
  * `port`
- Integer; defaults to `1194`.
+ Integer; defaults to `undef`.
 
  * `proto`
- String; defaults to `udp`.
+ String; defaults to `undef`.
 
  * `remote_cert_tls`
- String; defaults to `server`.
+ String; defaults to `undef`.
 
  * `resolv_retry`
- String; defaults to `infinite`.
+ String; defaults to `undef`.
 
  * `server`
  String; defaults to `$name`.
@@ -149,10 +149,10 @@ noted here.
  Bool; defaults to `true`.
 
  * `user`
- String; defaults to `nobody`.
+ String; defaults to `undef`.
 
  * `verb`
- Integer; defaults to `3`.
+ Integer; defaults to `undef`.
 
 
 ## Limitations
