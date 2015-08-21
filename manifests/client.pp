@@ -23,6 +23,9 @@
 # * `ca`
 # Absolute path; defaults to `undef`.
 #
+# * `cert`
+# Absolute path; defaults to `undef`.
+#
 # * `cipher`
 # String; defaults to `AES-256-CBC`.
 #
@@ -35,8 +38,17 @@
 # * `dev`
 # String; defaults to `tun`.
 #
+# * `group`
+# String; defaults to `nogroup`.
+#
+# * `key`
+# Absolute path; defaults to `undef`.
+#
 # * `nobind`
 # Bool; defaults to `true`.
+#
+# * `ns_cert_type`
+# String; defaults to `server`.
 #
 # * `persist_key`
 # Bool; defaults to `true`.
@@ -65,6 +77,9 @@
 # * `tls_client`
 # Bool; defaults to `true`.
 #
+# * `user`
+# String; defaults to `nobody`.
+#
 # * `verb`
 # Integer; defaults to `3`.
 #
@@ -72,12 +87,16 @@ define openvpn_client::client(
   $auth              = 'SHA256',
   $auth_user_pass    = undef,
   $ca                = undef,
+  $cert              = undef, #new
   $cipher            = 'AES-256-CBC',
   $client            = true,
   $comp_lzo          = 'adaptive',
   $custom_options    = [],
   $dev               = 'tun',
+  $group             = 'nogroup', #new
+  $key               = undef, #new
   $nobind            = true,
+  $ns_cert_type      = 'server', #new
   $persist_key       = true,
   $persist_remote_ip = true,
   $persist_tun       = true,
@@ -87,6 +106,7 @@ define openvpn_client::client(
   $resolv_retry      = 'infinite',
   $server            = $name,
   $tls_client        = true,
+  $user              = 'nobody', #new
   $verb              = 3,
   ) {
 
@@ -96,11 +116,15 @@ define openvpn_client::client(
   unless $auth == undef { validate_string($auth) }
   unless $auth_user_pass == undef { validate_absolute_path($auth_user_pass) }
   unless $ca == undef { validate_absolute_path($ca) }
+  unless $cert == undef { validate_absolute_path($cert) }
   unless $cipher == undef { validate_string($cipher) }
   unless $client == undef { validate_bool($client) }
   unless $comp_lzo == undef { validate_string($comp_lzo) }
   unless $dev == undef { validate_string($dev) }
+  unless $group == undef { validate_string($group) }
+  unless $key == undef { validate_absolute_path($key) }
   unless $nobind == undef { validate_bool($nobind) }
+  unless $ns_cert_type == undef { validate_string($ns_cert_type) }
   unless $persist_key == undef { validate_bool($persist_key) }
   unless $persist_remote_ip == undef { validate_bool($persist_remote_ip) }
   unless $persist_tun == undef { validate_bool($persist_tun) }
@@ -110,6 +134,7 @@ define openvpn_client::client(
   unless $resolv_retry == undef { validate_string($resolv_retry) }
   unless $server == undef { validate_string($server) }
   unless $tls_client == undef { validate_bool($tls_client) }
+  unless $user == undef { validate_string($user) }
   unless $verb == undef { validate_integer($verb) }
 
   file { "${::openvpn_client::openvpn_dir}/${server}.conf":

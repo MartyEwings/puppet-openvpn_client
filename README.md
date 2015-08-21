@@ -94,6 +94,9 @@ noted here.
  * `ca`
  Absolute path; defaults to `undef`.
 
+ * `cert`
+ Absolute path; defaults to `undef`.
+
  * `cipher`
  String; defaults to `AES-256-CBC`.
 
@@ -106,8 +109,17 @@ noted here.
  * `dev`
  String; defaults to `tun`.
 
+ * `group`
+ String; defaults to `nogroup`.
+
+ * `key`
+ Absolute path; defaults to `undef`.
+
  * `nobind`
  Bool; defaults to `true`.
+
+ * `ns_cert_type`
+ String; defaults to `server`.
 
  * `persist_key`
  Bool; defaults to `true`.
@@ -135,6 +147,9 @@ noted here.
 
  * `tls_client`
  Bool; defaults to `true`.
+
+ * `user`
+ String; defaults to `nobody`.
 
  * `verb`
  Integer; defaults to `3`.

@@ -36,13 +36,28 @@ verb <%= @verb %>
 <%- unless @ca.nil? -%>
 ca <%= @ca %>
 <%- end -%>
+<%- unless @user.nil? -%>
+user <%= @ca %>
+<%- end -%>
+<%- unless @group.nil? -%>
+group <%= @ca %>
+<%- end -%>
 
 # TLS Mode options
+<%- unless @cert.nil? -%>
+cert <%= @cert %>
+<%- end -%>
+<%- unless @key.nil? -%>
+key <%= @key %>
+<%- end -%>
 <%- if @tls_client -%>
 tls-client
 <%- end -%>
 <%- unless @remote_cert_tls.nil? -%>
 remote-cert-tls <%= @remote_cert_tls %>
+<%- end -%>
+<%- unless @ns_cert_type.nil? -%>
+ns-cert-type <%= @ns_cert_type %>
 <%- end -%>
 
 # Client Mode options
