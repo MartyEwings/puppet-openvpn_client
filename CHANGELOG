@@ -1,5 +1,8 @@
-2015-08-18 Release 0.1.0
-- initial version
+2015-08-20 Release 0.1.3
+- added new params to client config template
 
 2015-08-20 Release 0.1.1
 - allow undef in client params
+
+2015-08-18 Release 0.1.0
+- initial version
